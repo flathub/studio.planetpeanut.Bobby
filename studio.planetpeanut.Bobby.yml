@@ -1,0 +1,27 @@
+app-id: studio.planetpeanut.Bobby
+command: bobby
+
+runtime: org.gnome.Platform
+runtime-version: '49'
+sdk: org.gnome.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    RUST_BACKTRACE: '1'
+
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+
+modules:
+  - name: bobby
+    buildsystem: meson
+    builddir: true
+    sources:
+      - type: archive
+        url: https://github.com/hbons/Bobby/releases/download/49.0.0/Bobby-49.0.0.tar.xz
+        sha256: e470e3f537eacdce5ceefac4c63a807d7e512e8f6a1acc3567a14ac892001cf3
